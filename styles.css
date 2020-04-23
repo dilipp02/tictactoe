@@ -4,6 +4,7 @@ body{
 
 .card{
     border: #181f1c;
+    min-height: 700px;
 }
 
 .card-header{
@@ -13,11 +14,12 @@ body{
 .card-body{
     background-color: #274029;
 }
-/* , .box-2, .box-3, .box-4, .box-5, .box-6, .box-7, .box-8, .box-9 */
+
 .grid-container{
+    margin-top: 40px;
     display: grid;
-    grid-template-columns: 150px 150px 150px;
-    grid-template-rows: 150px 150px 150px;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
     border: firebrick;
 }
 
@@ -25,6 +27,30 @@ body{
     background-color: #9EA93F;
     border: 1px solid rgba(0, 0, 0, 0.8);
     padding: 20px;
-    font-size: 30px;
+}
+
+.X-styling{
+    color: firebrick;
+    font-family: 'Bowlby One SC', cursive;
+    font-size: 60px;
     text-align: center;
+}
+
+.O-styling{
+    color: whitesmoke;
+    font-family: 'Bowlby One SC', cursive;
+    font-size: 60px;
+    text-align: center;
+}
+
+#result{
+    margin-top: 40px;
+    color: rgb(1, 5, 0);
+    font-size: larger;
+    text-align: center;
+}
+
+button{
+    position: fixed;
+    margin-top: 60px;
 }
