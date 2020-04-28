@@ -53,6 +53,16 @@ function updateSinglePlayer(id) {
     }
 }
 
+function restartGame() {
+    currentplayer = "X";
+    gameover = false;
+    for(let i=1 ; i<gameState.length ; i++)
+        gameState[i] = "";
+    for(let i=0 ; i<9 ; i++)
+        box.children[i].innerHTML = "";
+    result.innerHTML = "";
+}
+
 box.addEventListener('click', e => {
     if(isGameOver(gameState) || gameover || gameType == "none")
         return;
@@ -63,15 +73,7 @@ box.addEventListener('click', e => {
 });
 
 restart.addEventListener('click', e =>{
-    currentplayer = "X";
-    gameover = false;
-    for(let i=1 ; i<gameState.length ; i++)
-        gameState[i] = "";
-    for(let i=0 ; i<9 ; i++){
-        box.children[i].innerHTML = "";
-        console.log(i);
-    }
-    result.innerHTML = "";
+    restartGame();
 });
 
 selButton.addEventListener('click', e => {
@@ -79,4 +81,5 @@ selButton.addEventListener('click', e => {
     gameType = select.value;
     if(gameType == "none")
         return;
+    restartGame();
 });
