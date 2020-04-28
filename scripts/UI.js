@@ -1,11 +1,35 @@
 const box = document.querySelector('.grid-container');
 const result = document.getElementById('result');
 const restart = document.querySelector('.restart');
+const select = document.querySelector('.select-box');
+const selButton = document.querySelector('.selButton');
 let gameover = false;
-let player1 = "X", opponent1 = "O";
+let player1 = "X", opponent1 = "O", currentplayer = "X";
 let gameState = ["", "", "", "", "", "", "", "", "", ""];
+let gameType = "none";
 
-function updateUI(id) {
+function updateTwoPlayer(id) {
+    if(gameState[id] != "")
+        return;
+    document.getElementById(id).innerHTML = `<h1 class="${currentplayer}-styling">${currentplayer}</h1>`;
+    gameState[id] = currentplayer;
+    let score = evaluate(gameState, player1, opponent1);
+    if(score == 10 || score == -10){
+        result.innerHTML = `<span>${currentplayer} has won the game</span><br>`;
+        gameover = true;
+        return;
+    }
+    if(isGameOver(gameState)){
+        result.innerHTML = `<span>It is a Draw</span><br>`;
+        return;
+    }
+    if(currentplayer == player1)
+        currentplayer = opponent1;
+    else
+        currentplayer = player1;
+}
+
+function updateSinglePlayer(id) {
     if(gameState[id] != "")
         return;
     document.getElementById(id).innerHTML = `<h1 class="${player1}-styling">${player1}</h1>`;
@@ -30,10 +54,29 @@ function updateUI(id) {
 }
 
 box.addEventListener('click', e => {
-    if(!isGameOver(gameState) && !gameover)
-        updateUI(e.target.id);
+    if(isGameOver(gameState) || gameover || gameType == "none")
+        return;
+    if(gameType == "singlePlayer")
+        updateSinglePlayer(e.target.id);
+    else
+        updateTwoPlayer(e.target.id);
 });
 
 restart.addEventListener('click', e =>{
-    location.reload();
+    currentplayer = "X";
+    gameover = false;
+    for(let i=1 ; i<gameState.length ; i++)
+        gameState[i] = "";
+    for(let i=0 ; i<9 ; i++){
+        box.children[i].innerHTML = "";
+        console.log(i);
+    }
+    result.innerHTML = "";
+});
+
+selButton.addEventListener('click', e => {
+    e.preventDefault();
+    gameType = select.value;
+    if(gameType == "none")
+        return;
 });
